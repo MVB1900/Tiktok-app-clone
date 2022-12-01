@@ -139,7 +139,7 @@ export default function VideoItem({data, isActive}) {
         <View
       style={[
         styles.container,
-        {height: WINDOW_HEIGHT},
+        {height: WINDOW_HEIGHT - bottomTabHeight},
       ]}>
       <StatusBar barStyle={'light-content'} />
 

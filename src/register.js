@@ -141,13 +141,13 @@ const Register = ({navigation}) => {
                         {loading ? 'Loading...' : 'Đăng ký'}
                       </ButtonText>
                     </SubmitForm>
-                    <NewToNetflixTextWrapper
+                    <ButtonDesign
                       activeOpacity={0.5}
                       onPress={() => navigation.navigate('Login')}>
-                      <NewToNetflix>
+                      <SignupLinkDesign>
                         Đã có tài khoản? Đăng nhập ngay
-                      </NewToNetflix>
-                    </NewToNetflixTextWrapper>
+                      </SignupLinkDesign>
+                    </ButtonDesign>
                   </InputsWrapper>
                 </KeyboardAvoidingView>
               </Form>
@@ -173,7 +173,6 @@ const FormWrapper = styled.View`
 const Form = styled.View`
   height: 400px;
   width: 90%;
-  background-color: black;
   flex-direction: column;
   border-radius: 20px;
   padding: 20px;
@@ -197,10 +196,13 @@ const Input = styled.TextInput`
   height: 50px;
   border: none;
   padding: 10px;
-  border-radius: 15px;
-  background-color: #333333;
-  color: white;
+  border-radius: 13px;
+  background-color: white;
+  color: black;
   margin-top: 10px;
+`;
+const ButtonDesign = styled.TouchableOpacity`
+  width: 100%;
 `;
 
 const ButtonText = styled.Text`
@@ -217,11 +219,8 @@ const SignInText = styled.Text`
   text-align: left;
 `;
 
-const NewToNetflixTextWrapper = styled.TouchableOpacity`
-  width: 100%;
-`;
 
-const NewToNetflix = styled.Text`
+const SignupLinkDesign = styled.Text`
   font-size: 15px;
   font-weight: 500;
   text-align: center;
@@ -243,17 +242,14 @@ const HalfInputWrapper = styled.View`
 
 const HalfInput = styled.TextInput`
   width: 45.8%;
+  margin-right: 5px;
+  margin-top: 10px;
   height: 50px;
   border: none;
   padding: 10px;
-  border-radius: 15px;
-  background-color: #333333;
-  color: white;
-  margin-right: 5px;
-  margin-top: 10px;
-  &:focus {
-    background-color: #454545;
-  }
+  border-radius: 13px;
+  background-color: white;
+  color: black;
 `;
 
 const InputsWrapper = styled.View`

@@ -22,7 +22,7 @@ const screenOptions = {
 const App = props => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+      <Stack.Navigator initialRouteName="Login" screenOptions={screenOptions}>
         <Stack.Screen name={'Home'} component={Home} />
         <Stack.Screen
           name="Login"

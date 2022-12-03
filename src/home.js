@@ -24,7 +24,7 @@ const TiktokScreen = () => {
             pagingEnabled
             renderItem={({item, index}) => <VideoItem data={item} isActive={ activeVideoIndex === index}></VideoItem>}
             onScroll={e => {
-                const index = Math.round(e.nativeEvent.contentOffset.y / (WINDOW_HEIGHT - bottomTabHeight))
+                const index = Math.round(e.nativeEvent.contentOffset.y / (WINDOW_HEIGHT))
                 setActiveVideoIndex(index)
             }}/>
     

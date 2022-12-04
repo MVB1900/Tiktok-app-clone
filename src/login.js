@@ -54,7 +54,7 @@ const Login = ({navigation}) => {
                   <Picker.Item label="Úc" value="AU" />
                 </Picker>
                 <SubmitForm onPress={login} disabled={loading}>
-                  <ButtonText>{loading ? 'Loading...' : 'Đăng nhập'}</ButtonText>
+                  <ButtonText>{loading ? 'Loading...' : 'Xem Ngay'}</ButtonText>
                 </SubmitForm>
                 {/* <ButtonDesign
                   activeOpacity={0.5}

@@ -61,7 +61,8 @@ const TiktokScreen = () => {
               "comments": element["statistics"]["comment_count"],
               "avatarUri": element["author"]["avatar_300x300"]["url_list"][0],
             }
-            data.push(el)
+            if (!data.includes(el))
+              data.push(el)
           });
         }
         catch {

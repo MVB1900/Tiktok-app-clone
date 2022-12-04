@@ -4,6 +4,7 @@
 import React, {useState} from 'react';
 import {Dimensions, ImageBackground, StatusBar, Text} from 'react-native';
 import styled from 'styled-components/native';
+import {Picker} from '@react-native-picker/picker';
 
 
 import Apis, {endpoints} from '../config/Apis';
@@ -12,45 +13,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = useState('bvm');
-  const [password, setPassword] = useState('123');
+  const [selectedValue, setSelectedValue] = useState("VN");
+
   const [loading, setLoading] = useState(false);
   const login = async () => {
-    setLoading(true);
-    if (!username || !password) {
-      alert('All fields are mandatory');
-      setPassword('');
-      setUsername('');
-      setLoading(false);
-      return;
-    } else {
-      try {
-        // var login = await Apis.post(endpoints['login'], {
-        //   username: username,
-        //   password: password,
-        //   type: 'login'
-        // });
-
-        // var user = login.data
-        var user = {
-          "username": "bvm",
-          "id": "1"
-        }
-        await AsyncStorage.setItem('user', JSON.stringify(user));
-        setLoading(false);
-        navigation.replace('Home');
-      } catch (err) {
-        console.log(err.message);
-        if (err.message === 'Network Error') {
-          alert('Có lỗi xảy ra, vui lòng thử lại sau.');
-        } else {
-          alert('Tài khoản hoặc mật khẩu không chính xác.');
-        }
-        setLoading(false);
-      }
+    console.log(selectedValue)
+    navigation.replace('Home', {
+      country: selectedValue
+    });
     }
-  };
   return (
+    
     <>
       <StatusBar style="light" />
       <ContainerView>
@@ -63,28 +36,31 @@ const Login = ({navigation}) => {
           <Overlay>
             <FormWrapper>
               <Form>
-                <SignInText>Đăng nhập</SignInText>
-                <Input
-                  placeholder="Tên đăng nhập"
-                  placeholderTextColor="grey"
-                  value={username}
-                  onChangeText={text => setUsername(text)}
-                />
-                <Input
-                  placeholder="Mật khẩu"
-                  placeholderTextColor="grey"
-                  secureTextEntry
-                  value={password}
-                  onChangeText={text => setPassword(text)}
-                />
+                <SignInText>Chọn Quốc Gia</SignInText>
+                <Picker
+                  selectedValue={selectedValue}
+                  style={{ width: '95%',
+                    height: 50,
+                    padding: 10,
+                    borderRadius: 13,
+                    backgroundColor: "white",
+                    color: "black",
+                    marginTop: 10 }}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                  <Picker.Item label="Việt Nam" value="VN" />
+                  <Picker.Item label="Hàn Quốc" value="KR" />
+                  <Picker.Item label="Nhật Bản" value="JP" />
+                  <Picker.Item label="Úc" value="AU" />
+                </Picker>
                 <SubmitForm onPress={login} disabled={loading}>
                   <ButtonText>{loading ? 'Loading...' : 'Đăng nhập'}</ButtonText>
                 </SubmitForm>
-                <ButtonDesign
+                {/* <ButtonDesign
                   activeOpacity={0.5}
                   onPress={() => navigation.navigate('Register')}>
                   <SignupLinkDesign>Chưa có tài khoản? <Text style={{color: "#c52028"}}>Đăng ký ngay</Text></SignupLinkDesign>
-                </ButtonDesign>
+                </ButtonDesign> */}
               </Form>
             </FormWrapper>
           </Overlay>

@@ -2,6 +2,8 @@
 
   export const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get("window")
 
+
+  
   const data =  [
     // {
     //   "id": "7092065213868002561",

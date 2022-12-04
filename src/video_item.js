@@ -134,10 +134,6 @@ export default function VideoItem({data, isActive}) {
 
     const bottomTabHeight = useBottomTabBarHeight();
     const statusBarHeight = StatusBar.currentHeight || 0;
-    useEffect(() => {
-      console.log("Height:", WINDOW_HEIGHT)
-      console.log("Height:", bottomTabHeight)
-    })
     return (
     <View
       style={[

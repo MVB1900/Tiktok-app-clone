@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, Image, StyleSheet, View, Text} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Picker} from '@react-native-picker/picker';
 
 import VideoItem from './video_item';
 let data = []
 import { WINDOW_HEIGHT } from '../data/videos';
 
 
-country_selected = "VN"
+let country_selected = "VN"
 
 import {
   createBottomTabNavigator,
@@ -20,6 +21,7 @@ const TiktokScreen = () => {
     const [activeVideoIndex, setActiveVideoIndex] = useState(0)
 
     const bottomTabHeight = useBottomTabBarHeight()
+    const [selectedValue, setSelectedValue] = useState("VN");
 
     const [video_raw, setVideo_raw] = useState(false)
 
@@ -41,6 +43,16 @@ const TiktokScreen = () => {
       })
     }
     
+    useEffect( () => {
+      console.log(data.length)
+      if (selectedValue != country_selected)
+      {
+        data = []
+        country_selected = selectedValue
+        getvals().then(response => setVideo_raw(response));
+      }
+    }
+    )
     if (!video_raw)
     {
       if (data.length < 40)
@@ -76,6 +88,32 @@ const TiktokScreen = () => {
     }
 
     return (
+      <View>
+        <Picker
+                  selectedValue={selectedValue}
+                  style={{ width: 70,
+                    position: 'absolute',
+                    right:    0,
+                    top: 50,
+                    height: 30,
+                    borderRadius: 13,
+                    backgroundColor: "white",
+                    color: "black",
+                    zIndex: 3, // works on ios
+                    elevation: 3, // works on android
+                    marginTop: 10 }}
+                  onValueChange={(itemValue, itemIndex) => {
+                    setSelectedValue(itemValue)
+                    data = []
+                    country_selected = selectedValue;
+                    getvals().then(response => setVideo_raw(response));
+                  }}
+                >
+                  <Picker.Item label="Việt Nam" value="VN" />
+                  <Picker.Item label="Hàn Quốc" value="KR" />
+                  <Picker.Item label="Nhật Bản" value="JP" />
+                  <Picker.Item label="Úc" value="AU" />
+                </Picker>
         <FlatList
             data = {data}
             pagingEnabled
@@ -84,12 +122,12 @@ const TiktokScreen = () => {
                 const index = Math.round(e.nativeEvent.contentOffset.y / (WINDOW_HEIGHT))
                 setActiveVideoIndex(index)
             }}/>
+        </View>
     )
 }
 
 const Home = ({ route, navigation }) => {
   const country = route.params.country
-  console.log(country)
   country_selected = country
   return (
     <BottomTab.Navigator

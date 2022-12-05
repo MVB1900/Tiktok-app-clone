@@ -61,8 +61,9 @@ const TiktokScreen = () => {
               "comments": element["statistics"]["comment_count"],
               "avatarUri": element["author"]["avatar_300x300"]["url_list"][0],
             }
-            if (!data.includes(el))
-              data.push(el)
+            const is_includes_el = data.find(video => video["id"] == el["id"])
+            if (is_includes_el != -1)
+                data.push(el)
           });
         }
         catch {
